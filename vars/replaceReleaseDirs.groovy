@@ -15,8 +15,8 @@ def call(String baseDir, Boolean withRuntimeDir = false) {
   sh "mv ${baseDir}/release-next ${baseDir}/release"
 
   if (withRuntimeDir) {
-    sh "rm -r -f ${baseDir}/release/runtime"
-    sh "mkdir ${baseDir}/release/runtime -m 777"
+    sh "rm -r -f ${baseDir}/release/app/runtime"
+    sh "mkdir ${baseDir}/release/app/runtime -m 777"
   }
 
   sh "ln -s ${baseDir}/release ${baseDir}/site"
