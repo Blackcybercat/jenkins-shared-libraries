@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def call(String baseDir, Boolean withRuntimeDir = false) {
+def call(String baseDir, Boolean forBaseYii = false) {
   // Init directory structure for the first start
   sh "mkdir -p ${baseDir}/release-prev"
   sh "mkdir -p ${baseDir}/release"
@@ -14,9 +14,11 @@ def call(String baseDir, Boolean withRuntimeDir = false) {
   sh "mv ${baseDir}/release ${baseDir}/release-prev"
   sh "mv ${baseDir}/release-next ${baseDir}/release"
 
-  if (withRuntimeDir) {
+  if (forBaseYii) {
     sh "rm -r -f ${baseDir}/release/app/runtime"
     sh "mkdir ${baseDir}/release/app/runtime -m 777"
+    sh "rm -r -f ${baseDir}/release/app/web/assets-yii"
+    sh "mkdir ${baseDir}/release/app/web/assets-yii -m 777"
   }
 
   sh "ln -s ${baseDir}/release ${baseDir}/site"
