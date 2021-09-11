@@ -7,5 +7,5 @@ def call(Boolean isSuccess) {
     colour=5763719
     text='Build was restored'
   }
-  sh """curl -X POST -H "Content-Type: application/json" -d '{"embeds":[{"title": "${env.JOB_NAME}", "description": "${text}${env.BUILD_URL}", "color": ${colour}}]}' -H "Content-Type:application/json" ${env.discordMonitoringWebhookUrl}"""
+  sh """curl -X POST -H "Content-Type: application/json" -d '{"embeds":[{"title": "${env.JOB_NAME}", "description": "${text}\\n${env.BUILD_URL}", "color": ${colour}}]}' -H "Content-Type:application/json" ${env.discordMonitoringWebhookUrl}"""
 }
