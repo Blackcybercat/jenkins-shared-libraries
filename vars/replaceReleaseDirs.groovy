@@ -7,7 +7,7 @@ def call(String baseDir, Boolean forBaseYii = false) {
 
   // Copy source files
   sh "rm -r -f ${baseDir}/release-next"
-  sh "cp -r '${env.WORKSPACE}' ${baseDir}/release-next"
+  sh "cp -r '${env.WORKSPACE}/app' ${baseDir}/release-next"
 
   // Replace the current release by the built
   sh "rm -r -f ${baseDir}/release-prev"
