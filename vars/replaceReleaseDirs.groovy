@@ -6,21 +6,21 @@ def call(String baseDir, Boolean forBaseYii = false) {
   sh "mkdir -p ${baseDir}/release"
 
   // Copy source files
-  sh "rm -r -f ${baseDir}/release-next"
+  sh "sudo rm -r -f ${baseDir}/release-next"
   sh "cp -r '${env.WORKSPACE}/app' ${baseDir}/release-next"
 
   // Replace the current release by the built
-  sh "rm -r -f ${baseDir}/release-prev"
+  sh "sudo rm -r -f ${baseDir}/release-prev"
   sh "mv ${baseDir}/release ${baseDir}/release-prev"
   sh "mv ${baseDir}/release-next ${baseDir}/release"
 
   if (forBaseYii) {
-    sh "rm -r -f ${baseDir}/release/runtime"
+    sh "sudo rm -r -f ${baseDir}/release/runtime"
     sh "mkdir ${baseDir}/release/runtime -m 777"
-    sh "rm -r -f ${baseDir}/release/web/assets-yii"
+    sh "sudo rm -r -f ${baseDir}/release/web/assets-yii"
     sh "mkdir ${baseDir}/release/web/assets-yii -m 777"
   }
 
   sh "ln -s ${baseDir}/release ${baseDir}/site"
-  sh "rm -r -f ${baseDir}/release-prev"
+  sh "sudo rm -r -f ${baseDir}/release-prev"
 }
