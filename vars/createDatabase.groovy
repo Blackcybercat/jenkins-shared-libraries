@@ -8,4 +8,5 @@ def call(String dbName, Boolean dropExisted = false) {
   }
 
     sh "psql -U $postgresUser -d 'postgres' -c \"CREATE DATABASE IF NOT EXISTS $dbName \""
+    sh "psql -U postgres -tc \"SELECT 1 FROM pg_database WHERE datname = 'bName'\" | grep -q 1 | psql -U $postgresUser -d 'postgres' -c \"CREATE DATABASE $dbName \""
 }
