@@ -6,6 +6,7 @@ def call(String dbName, Boolean dropExisted = false) {
   if (dropExisted) {
     sh "psql -U $postgresUser -d 'postgres' -c \"DROP DATABASE IF EXISTS $dbName \""
   }
-
-  sh "psql -U $postgresUser -tc \"SELECT 1 FROM pg_database WHERE datname = '$dbName'\" | grep -q 1 | psql -U $postgresUser -d 'postgres' -c \"CREATE DATABASE $dbName \""
+if(sh (script: "psql -U $postgresUser -d 'postgres' -tc \"SELECT 1 FROM pg_database WHERE datname = '$dbName'\" | grep -q 1", returnStatus: true)){
+  sh "psql -U $postgresUser -d 'postgres' -c \"CREATE DATABASE $dbName \""
+  }
 }
